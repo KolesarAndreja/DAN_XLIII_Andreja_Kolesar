@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DAN_XLIII.View"
         xmlns:Converter="clr-namespace:DAN_XLIII.Converter"
+        xmlns:Validation="clr-namespace:DAN_XLIII.Validation"
         mc:Ignorable="d"
         Title="AdminMenu"
         Height="650"
@@ -169,22 +170,37 @@
                      TextWrapping="Wrap"
                      VerticalAlignment="Top"
                      Width="320"/>
-            <TextBox x:Name="txtDateOfBirth"
-                     Text="{Binding newEmployee.dateOfBirth, UpdateSourceTrigger=PropertyChanged}"
-                     HorizontalAlignment="Left"
-                     Height="23"
-                     Margin="160,160,0,0"
-                     TextWrapping="Wrap"
-                     VerticalAlignment="Top"
-                     Width="320"/>
-            <TextBox x:Name="txtJmbg"
-                     Text="{Binding newEmployee.jmbg, UpdateSourceTrigger=PropertyChanged}"
-                     HorizontalAlignment="Left"
-                     Height="23"
-                     Margin="160,204,0,0"
-                     TextWrapping="Wrap"
-                     VerticalAlignment="Top"
-                     Width="320"/>
+        <TextBox x:Name="txtDateOfBirth"
+                 Text="{Binding newEmployee.dateOfBirth, UpdateSourceTrigger=PropertyChanged}"
+                 HorizontalAlignment="Left"
+                 Height="23"
+                 Margin="160,160,0,0"
+                 TextWrapping="Wrap"
+                 VerticalAlignment="Top"
+                 Width="320" />
+        <TextBox Validation.ErrorTemplate="{StaticResource textBoxErrorTemplate}"
+                 Name="txtJmbg"
+                 HorizontalAlignment="Left"
+                 Height="23"
+                 Margin="160,204,0,0"
+                 TextWrapping="Wrap"
+                 VerticalAlignment="Top"
+                 Width="320">
+            <TextBox.Text>
+                <Binding Path="newEmployee.jmbg"
+                         UpdateSourceTrigger="PropertyChanged"
+                         ValidatesOnDataErrors="True"
+                         NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <Validation:ValidJmbg />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        
+        
+        
+        
             <TextBox x:Name="txtMail"
                      Text="{Binding newEmployee.mail, UpdateSourceTrigger=PropertyChanged}"
                      HorizontalAlignment="Left"

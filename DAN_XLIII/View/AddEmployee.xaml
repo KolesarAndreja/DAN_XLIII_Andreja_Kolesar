@@ -139,6 +139,7 @@
                  TextWrapping="Wrap"
                  VerticalAlignment="Top"
                  Width="320" />
+        
         <TextBox x:Name="txtMail"
                  Text="{Binding newEmployee.mail, UpdateSourceTrigger=PropertyChanged}"
                  HorizontalAlignment="Left"

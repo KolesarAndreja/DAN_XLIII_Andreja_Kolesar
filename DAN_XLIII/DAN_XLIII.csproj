@@ -95,6 +95,7 @@
     <Compile Include="Service\vwReport.cs">
       <DependentUpon>ModelRecords.tt</DependentUpon>
     </Compile>
+    <Compile Include="Validation\ValidJmbg.cs" />
     <Compile Include="ViewModel\AddEmployeeViewModel.cs" />
     <Compile Include="ViewModel\AdminViewModel.cs" />
     <Compile Include="ViewModel\AuthenticationViewModel.cs" />
