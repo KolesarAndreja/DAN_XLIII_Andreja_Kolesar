@@ -7,6 +7,44 @@
         mc:Ignorable="d"
         Title="ManagerReadonly" Height="450" Width="800">
     <Grid>
-        
+        <Grid Grid.Column="1"
+              Grid.Row="10"
+              Height="auto"
+              Width="auto">
+            <DataGrid Name="DataGridPlayers"
+                      ItemsSource="{Binding employeeList, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding viewEmployee, UpdateSourceTrigger=PropertyChanged}"
+                      IsReadOnly="True"
+                      HeadersVisibility="Column"
+                      AutoGenerateColumns="False"
+                      HorizontalGridLinesBrush="Black"
+                      BorderBrush="Black"
+                      Foreground="Black"
+                      FontWeight="Bold"
+                      Margin="40,61,42,109">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Employee id"
+                                        Binding="{Binding employeeId}" />
+                    <DataGridTextColumn Header="First name"
+                                        Binding="{Binding firstname}" />
+                    <DataGridTextColumn Header="Second name"
+                                        Binding="{Binding lastname}" />
+                    <DataGridTextColumn Header="Date Of Birth"
+                                        Binding="{Binding dateOfBirth}" />
+                    <DataGridTextColumn Header="Jmbg"
+                                        Binding="{Binding jmbg}" />
+                    <DataGridTextColumn Header="Account Number"
+                                        Binding="{Binding accountNumber}" />
+                    <DataGridTextColumn Header="Mail"
+                                        Binding="{Binding mail}" />
+                    <DataGridTextColumn Header="Salary"
+                                        Binding="{Binding salary}" />
+                    <DataGridTextColumn Header="Position"
+                                        Binding="{Binding position}" />
+                    <DataGridTextColumn Header="Username"
+                                        Binding="{Binding username}" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
     </Grid>
 </Window>

@@ -13,12 +13,6 @@
         <Converter:StringConverter x:Key="stringConverterKey" />
     </Window.Resources>
     <Grid>
-        <Button Content="Create new manager&#xD;&#xA;"
-                HorizontalAlignment="Left"
-                Height="25"
-                Margin="80,25,0,0"
-                VerticalAlignment="Top"
-                Width="185" />
         <Button Content="Log out"
                 Command="{Binding logOut, UpdateSourceTrigger=PropertyChanged}"
                 HorizontalAlignment="Left"
@@ -283,5 +277,12 @@
                 Margin="245,570,0,0"
                 VerticalAlignment="Top"
                 Width="140" />
+        <Label Content="CREATE NEW MANAGER:"
+               HorizontalAlignment="Left"
+               Height="25"
+               Margin="100,52,0,0"
+               VerticalAlignment="Top"
+               Width="205"
+               FontWeight="Bold" />
     </Grid>
 </Window>

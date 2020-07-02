@@ -98,6 +98,7 @@
     <Compile Include="ViewModel\AddEmployeeViewModel.cs" />
     <Compile Include="ViewModel\AdminViewModel.cs" />
     <Compile Include="ViewModel\AuthenticationViewModel.cs" />
+    <Compile Include="ViewModel\EmployeeViewModel.cs" />
     <Compile Include="ViewModel\ManagerModifyViewModel.cs" />
     <Compile Include="ViewModel\ManagerReadonlyViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />

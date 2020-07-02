@@ -1,6 +1,5 @@
 ﻿using DAN_XLIII.Command;
 using DAN_XLIII.Service;
-using DAN_XLIII.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,28 +10,32 @@ using System.Windows.Input;
 
 namespace DAN_XLIII.ViewModel
 {
-    class AdminViewModel:ViewModelBase
+    class EmployeeViewModel:ViewModelBase
     {
-        AdminMenu adminMenu;
-        private tblEmployee _newEmployee;
-        public tblEmployee newEmployee
+        View.Employee emp;
+
+        private tblReport _newReport;
+        public tblReport newReport
         {
             get
             {
-                return _newEmployee;
+                return _newReport;
             }
             set
             {
-                _newEmployee=value;
-                OnPropertyChanged("newEmployee");
+                _newReport = value;
+                OnPropertyChanged("newReport");
             }
         }
 
-        public AdminViewModel(AdminMenu openAdminMenu)
+
+        public EmployeeViewModel(View.Employee open, int id)
         {
-            adminMenu = openAdminMenu;
-            newEmployee = new tblEmployee(); 
+            emp = open;
+            newReport = new tblReport();
+            newReport.employeeId = id;
         }
+
 
         #region Commands
 
@@ -53,15 +56,16 @@ namespace DAN_XLIII.ViewModel
         {
             try
             {
-                tblEmployee e = Service.Service.AddNewEmployeeOrManager(newEmployee, true);
-                if (e != null)
+                string r = Service.Service.AddReport(newReport);
+                if (r != null)
                 {
-                    MessageBox.Show("Manager has been succesfully created!");
+                    MessageBox.Show(r);
                 }
                 else
                 {
-                    MessageBox.Show("Error. Try again.");
+                    MessageBox.Show("Report has been saved.");
                 }
+                
             }
             catch (Exception ex)
             {
@@ -71,15 +75,14 @@ namespace DAN_XLIII.ViewModel
 
         private bool CanSaveExecute()
         {
-            if (String.IsNullOrEmpty(newEmployee.firstname) || String.IsNullOrEmpty(newEmployee.lastname) || String.IsNullOrEmpty(newEmployee.jmbg) || String.IsNullOrEmpty(newEmployee.access) || String.IsNullOrEmpty(newEmployee.username) || String.IsNullOrEmpty(newEmployee.password) || newEmployee.sector!=null || newEmployee.access !=null)
-            {
+            if (String.IsNullOrEmpty(newReport.project))
+            { 
                 return false;
             }
             else
             {
                 return true;
             }
-            return true;
         }
 
         private ICommand _logOut;
@@ -89,7 +92,7 @@ namespace DAN_XLIII.ViewModel
             {
                 if (_logOut == null)
                 {
-                    _logOut = new RelayCommand(param => LogOutExecute(), param => CanLogOutExecute());
+                    _logOut = new Command.RelayCommand(param => LogOutExecute(), param => CanLogOutExecute());
                 }
                 return _logOut;
             }
@@ -99,7 +102,7 @@ namespace DAN_XLIII.ViewModel
         {
             try
             {
-                adminMenu.Close();
+                emp.Close();
             }
             catch (Exception ex)
             {

@@ -8,28 +8,11 @@
         Title="ManagerModify" Height="600
         " Width="800">
     <Grid>
-        <Label Content="Select employee's id:"
-               HorizontalAlignment="Left"
-               Height="25"
-               Margin="85,20,0,0"
-               VerticalAlignment="Top"
-               Width="125" />
-        <ComboBox HorizontalAlignment="Left"
-                  Height="25"
-                  Margin="230,20,0,0"
-                  VerticalAlignment="Top"
-                  Width="90" />
-        <Button Content="Read all "
-                HorizontalAlignment="Left"
-                Height="25"
-                Margin="85,100,0,0"
-                VerticalAlignment="Top"
-                Width="95" />
         <Button Content="Add new employee"
                 Command="{Binding addNewEmployee, UpdateSourceTrigger=PropertyChanged}"
                 HorizontalAlignment="Left"
                 Height="25"
-                Margin="500,100,0,0"
+                Margin="575,20,0,0"
                 VerticalAlignment="Top"
                 Width="140" />
         <Grid Grid.Column="1"
@@ -46,7 +29,7 @@
                       BorderBrush="Black"
                       Foreground="Black"
                       FontWeight="Bold"
-                      Margin="60,141,22,29">
+                      Margin="35,60,47,110">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Employee id"
                                         Binding="{Binding employeeId}" />
@@ -93,6 +76,13 @@
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
+            <Label Content="ALL EMPLOYEES:"
+                   HorizontalAlignment="Left"
+                   Height="35"
+                   Margin="45,20,0,0"
+                   VerticalAlignment="Top"
+                   Width="175"
+                   FontWeight="Bold" />
         </Grid>
     </Grid>
 </Window>

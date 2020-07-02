@@ -10,13 +10,6 @@
         Width="800">
     <Grid x:Name="btnLogOut"
           Margin="0,0,0,-3">
-        <Button x:Name="btnAddReport"
-                Content="Add daily report"
-                HorizontalAlignment="Left"
-                Height="30"
-                Margin="145,40,0,0"
-                VerticalAlignment="Top"
-                Width="155" />
         <Label x:Name="lblProject"
                Content="Project:"
                HorizontalAlignment="Left"
@@ -39,6 +32,7 @@
                VerticalAlignment="Top"
                Width="80" />
         <TextBox x:Name="txtProject"
+                 Text="{Binding newReport.project, UpdateSourceTrigger=PropertyChanged}"
                  HorizontalAlignment="Left"
                  Height="25"
                  Margin="240,120,0,0"
@@ -46,6 +40,7 @@
                  VerticalAlignment="Top"
                  Width="320" />
         <TextBox x:Name="txtWorkingHours"
+                 Text="{Binding newReport.workingHours, UpdateSourceTrigger=PropertyChanged}"
                  HorizontalAlignment="Left"
                  Height="25"
                  Margin="240,160,0,0"
@@ -53,6 +48,7 @@
                  VerticalAlignment="Top"
                  Width="320" />
         <TextBox x:Name="txtDate"
+                 Text="{Binding newReport.reportDate, UpdateSourceTrigger=PropertyChanged}"
                  HorizontalAlignment="Left"
                  Height="25"
                  Margin="240,200,0,0"
@@ -60,6 +56,7 @@
                  VerticalAlignment="Top"
                  Width="320" />
         <Button Content="Save"
+                Command="{Binding save, UpdateSourceTrigger=PropertyChanged}"
                 HorizontalAlignment="Left"
                 Height="30"
                 Margin="320,240,0,0"
@@ -73,6 +70,7 @@
                     VerticalAlignment="Top"
                     Width="540" />
         <Button Content="Log out"
+                Command="{Binding logOut, UpdateSourceTrigger=PropertyChanged}"
                 HorizontalAlignment="Left"
                 Height="30"
                 Margin="470,40,0,0"

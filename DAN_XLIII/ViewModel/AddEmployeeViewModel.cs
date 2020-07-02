@@ -83,15 +83,14 @@ namespace DAN_XLIII.ViewModel
 
         private bool CanSaveExecute()
         {
-            //if (String.IsNullOrEmpty(newUser.firstname) || String.IsNullOrEmpty(newUser.lastname) || String.IsNullOrEmpty(newUser.authority) || String.IsNullOrEmpty(newUser.sex) || String.IsNullOrEmpty(newUser.jmbg) || newUser.location == null)
-            //{
-            //    return false;
-            //}
-            //else
-            //{
-            //    return true;
-            //}
-            return true;
+            if (String.IsNullOrEmpty(newEmployee.firstname) || String.IsNullOrEmpty(newEmployee.lastname) || String.IsNullOrEmpty(newEmployee.jmbg) || String.IsNullOrEmpty(newEmployee.access) || String.IsNullOrEmpty(newEmployee.username) || String.IsNullOrEmpty(newEmployee.password))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         private ICommand _close;

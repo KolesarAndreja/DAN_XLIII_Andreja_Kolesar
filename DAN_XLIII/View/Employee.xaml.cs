@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DAN_XLIII.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,16 @@ namespace DAN_XLIII.View
     /// </summary>
     public partial class Employee : Window
     {
-        public Employee()
+        //public Employee()
+        //{
+        //    InitializeComponent();
+        //    this.DataContext = new EmployeeViewModel(this);
+        //}
+
+        public Employee(int id)
         {
             InitializeComponent();
+            this.DataContext = new EmployeeViewModel(this, id);
         }
     }
 }

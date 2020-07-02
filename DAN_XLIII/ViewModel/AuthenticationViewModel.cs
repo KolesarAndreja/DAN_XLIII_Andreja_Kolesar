@@ -63,7 +63,7 @@ namespace DAN_XLIII.ViewModel
                         adminMenu.ShowDialog();
                         break;
                     case "employee":
-                        DAN_XLIII.View.Employee e = new DAN_XLIII.View.Employee();
+                        DAN_XLIII.View.Employee e = new DAN_XLIII.View.Employee(currentEmployee.id);
                         e.ShowDialog();
                         break;
                     case "manager":

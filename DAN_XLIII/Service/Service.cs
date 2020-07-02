@@ -148,7 +148,7 @@ namespace DAN_XLIII.Service
                         return employee;
                     }
 
-                    
+
                 }
             }
             catch (Exception ex)
@@ -181,6 +181,43 @@ namespace DAN_XLIII.Service
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine("Exception" + ex.Message.ToString());
+            }
+        }
+        #endregion
+
+        #region ADD REPORT
+        public static string AddReport(tblReport report)
+        {
+            try
+            {
+                using (DataRecordsEntities1 context = new DataRecordsEntities1())
+                {
+                    int result = (from x in context.tblReports where x.employeeId == report.employeeId && x.reportDate == report.reportDate select x).Count();
+                    if (result < 2)
+                    {
+                        int hours = 0;
+                        if(result == 1)
+                        {
+                            hours = (from x in context.tblReports where x.employeeId == report.employeeId && x.reportDate == report.reportDate select x.workingHours).FirstOrDefault();
+                        }
+
+                        if(hours + report.workingHours <= 12)
+                        {
+                            context.tblReports.Add(report);
+                            context.SaveChanges();
+                        }
+                        return null;
+                    }
+                    else
+                    {
+                        return "too many working hours";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception: " + ex.Message.ToString());
+                return "invalid report";
             }
         }
         #endregion
