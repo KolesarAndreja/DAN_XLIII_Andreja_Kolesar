@@ -136,5 +136,31 @@ namespace DAN_XLIII.Service
             }
         }
         #endregion
+
+        #region DELETE
+        public static void DeleteEmployee(tblEmployee emp)
+        {
+            try
+            {
+                using (DataRecordsEntities1 context = new DataRecordsEntities1())
+                {
+                    if (isManager(emp))
+                    {
+                        tblManager managerToDelete = (from u in context.tblManagers where u.employeeId == emp.employeeId select u).First();
+                        context.tblManagers.Remove(managerToDelete);
+                        context.SaveChanges();
+                    }
+
+                    tblEmployee userToDelete = (from u in context.tblEmployees where u.employeeId == emp.employeeId select u).First();
+                    context.tblEmployees.Remove(userToDelete);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception" + ex.Message.ToString());
+            }
+        }
+        #endregion
     }
 }

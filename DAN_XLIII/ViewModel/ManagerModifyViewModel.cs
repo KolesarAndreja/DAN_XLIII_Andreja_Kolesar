@@ -86,15 +86,15 @@ namespace DAN_XLIII.ViewModel
         {
             MessageBoxResult result = MessageBox.Show("Do you realy want to delete this user?", "Delete User", MessageBoxButton.YesNo);
 
-            //if (result == MessageBoxResult.Yes)
-            //{
-            //    Service.Service.DeleteUser(viewUser.userID);
-            //    string content2 = "User  " + viewUser.fullname + " with id " + viewUser.userID + " has been deleted.";
-            //    LogIntoFile.getInstance().PrintActionIntoFile(content2);
-            //    isDeletedUser = true;
-            //    userList = Service.Service.GetAllUsers();
+            if (result == MessageBoxResult.Yes)
+            {
+                Service.Service.DeleteEmployee(viewEmployee);
+                //string content2 = "User  " + viewUser.fullname + " with id " + viewUser.userID + " has been deleted.";
+                //LogIntoFile.getInstance().PrintActionIntoFile(content2);
+                isDeletedEmployee = true;
+                employeeList = Service.Service.GetAllEmployees();
 
-            //}
+            }
         }
         private bool CanDeleteThisEmployeeExecute()
         {
