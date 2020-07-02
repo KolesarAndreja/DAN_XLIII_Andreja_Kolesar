@@ -27,18 +27,26 @@
                  Margin="165,84,0,0"
                  TextWrapping="Wrap"
                  VerticalAlignment="Top"
-                 Width="245" />
+                 Width="245"
+                 Text="{Binding currentEmployee.username, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox x:Name="txtPassword1"
+                 HorizontalAlignment="Left"
+                 Height="30"
+                 Margin="165,130,0,0"
+                 TextWrapping="Wrap"
+                 VerticalAlignment="Top"
+                 Width="245"
+                 Text="{Binding currentEmployee.password, UpdateSourceTrigger=PropertyChanged}" />
+        
         <Button x:Name="btnLogin"
                 Content="Login"
+                Command="{Binding login, UpdateSourceTrigger=PropertyChanged}"
                 HorizontalAlignment="Left"
                 Height="30"
                 Margin="210,180,0,0"
                 VerticalAlignment="Top"
-                Width="140" />
-        <PasswordBox HorizontalAlignment="Left"
-                     Height="30"
-                     Margin="165,130,0,0"
-                     VerticalAlignment="Top"
-                     Width="245" />
+                Width="140" 
+                />
+      
     </Grid>
 </Window>

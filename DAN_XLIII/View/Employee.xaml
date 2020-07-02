@@ -16,8 +16,7 @@
                 Height="30"
                 Margin="145,40,0,0"
                 VerticalAlignment="Top"
-                Width="155"
-                Click="Button_Click" />
+                Width="155" />
         <Label x:Name="lblProject"
                Content="Project:"
                HorizontalAlignment="Left"
@@ -66,7 +65,7 @@
                 Margin="320,240,0,0"
                 VerticalAlignment="Top"
                 Width="105"
-                Click="Button_Click" />
+/>
         <StackPanel x:Name="panelReport"
                     HorizontalAlignment="Left"
                     Height="190"
@@ -78,7 +77,6 @@
                 Height="30"
                 Margin="470,40,0,0"
                 VerticalAlignment="Top"
-                Width="155"
-                Click="Button_Click" />
+                Width="155"/>
     </Grid>
 </Window>

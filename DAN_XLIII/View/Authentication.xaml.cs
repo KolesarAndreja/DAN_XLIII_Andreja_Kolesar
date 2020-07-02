@@ -22,6 +22,7 @@ namespace DAN_XLIII.View
         public AuthenticationWindow()
         {
             InitializeComponent();
+            this.DataContext = new ViewModel.AuthenticationViewModel(this);
         }
     }
 }
