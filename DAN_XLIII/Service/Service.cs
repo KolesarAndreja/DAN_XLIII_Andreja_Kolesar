@@ -95,44 +95,66 @@ namespace DAN_XLIII.Service
         /// </summary>
         /// <param name="employee">Add this employee to db</param>
         /// <param name="manager">true if this employee is also and manager</param>
-        public static void AddNewEmployeeOrManager(tblEmployee employee, bool manager)
+        public static tblEmployee AddNewEmployeeOrManager(tblEmployee employee, bool manager)
         {
             try
             {
                 using (DataRecordsEntities1 context = new DataRecordsEntities1())
                 {
-                    //add into tblEmployee
-                    tblEmployee newEmployee = new tblEmployee();
-                    newEmployee.firstname = employee.firstname;
-                    newEmployee.lastname = employee.lastname;
-                    newEmployee.dateOfBirth = employee.dateOfBirth;
-                    newEmployee.jmbg = employee.jmbg;
-                    newEmployee.accountNumber = employee.accountNumber;
-                    newEmployee.mail = employee.mail;
-                    newEmployee.salary = employee.salary;
-                    newEmployee.position = employee.position;
-                    newEmployee.username = employee.username;
-                    newEmployee.password = employee.password;
-                    context.tblEmployees.Add(newEmployee);
-                    context.SaveChanges();
-                    employee.employeeId = newEmployee.employeeId;
-
-                    if (manager)
+                    if (employee.employeeId == 0)
                     {
-                        //add into tblManager
-                        tblManager newManager = new tblManager();
-                        newManager.employeeId = employee.employeeId;
-                        newManager.sector = employee.sector;
-                        newManager.access = employee.access;
-                        context.tblManagers.Add(newManager);
+                        //add into tblEmployee
+                        tblEmployee newEmployee = new tblEmployee();
+                        newEmployee.firstname = employee.firstname;
+                        newEmployee.lastname = employee.lastname;
+                        newEmployee.dateOfBirth = employee.dateOfBirth;
+                        newEmployee.jmbg = employee.jmbg;
+                        newEmployee.accountNumber = employee.accountNumber;
+                        newEmployee.mail = employee.mail;
+                        newEmployee.salary = employee.salary;
+                        newEmployee.position = employee.position;
+                        newEmployee.username = employee.username;
+                        newEmployee.password = employee.password;
+                        context.tblEmployees.Add(newEmployee);
                         context.SaveChanges();
+                        employee.employeeId = newEmployee.employeeId;
+
+                        if (manager)
+                        {
+                            //add into tblManager
+                            tblManager newManager = new tblManager();
+                            newManager.employeeId = employee.employeeId;
+                            newManager.sector = employee.sector;
+                            newManager.access = employee.access;
+                            context.tblManagers.Add(newManager);
+                            context.SaveChanges();
+                        }
+                        return employee;
                     }
+                    else
+                    {
+                        tblEmployee employeeToEdit = (from x in context.tblEmployees where x.employeeId == employee.employeeId select x).FirstOrDefault();
+                        employeeToEdit.firstname = employee.firstname;
+                        employeeToEdit.lastname = employee.lastname;
+                        employeeToEdit.dateOfBirth = employee.dateOfBirth;
+                        employeeToEdit.jmbg = employee.jmbg;
+                        employeeToEdit.accountNumber = employee.accountNumber;
+                        employeeToEdit.mail = employee.mail;
+                        employeeToEdit.salary = employee.salary;
+                        employeeToEdit.position = employee.position;
+                        employeeToEdit.username = employee.username;
+                        employeeToEdit.password = employee.password;
+                        context.SaveChanges();
+                        return employee;
+                    }
+
+                    
                 }
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine("Exception: " + ex.Message.ToString());
-                return;
+                return null;
             }
         }
         #endregion

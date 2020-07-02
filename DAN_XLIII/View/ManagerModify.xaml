@@ -26,6 +26,7 @@
                 VerticalAlignment="Top"
                 Width="95" />
         <Button Content="Add new employee"
+                Command="{Binding addNewEmployee, UpdateSourceTrigger=PropertyChanged}"
                 HorizontalAlignment="Left"
                 Height="25"
                 Margin="500,100,0,0"
@@ -82,10 +83,9 @@
                     <DataGridTemplateColumn>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Name="btnEdit"
+                                <Button Name="btnEditUser"
                                         Content="Edit"
-                                        Command="{Binding Path=DataContext.editThisEmployee, RelativeSource= {RelativeSource FindAncestor,
-                                       AncestorType={x:Type DataGrid}}, UpdateSourceTrigger=PropertyChanged}"
+                                        Command="{Binding DataContext.editThisEmployee, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
                                         Margin="4"
                                         FontWeight="Bold" />
                             </DataTemplate>

@@ -92,8 +92,10 @@ namespace DAN_XLIII.ViewModel
                 //string content2 = "User  " + viewUser.fullname + " with id " + viewUser.userID + " has been deleted.";
                 //LogIntoFile.getInstance().PrintActionIntoFile(content2);
                 isDeletedEmployee = true;
-                employeeList = Service.Service.GetAllEmployees();
-
+                if (isDeletedEmployee)
+                {
+                    employeeList = Service.Service.GetAllEmployees();
+                }
             }
         }
         private bool CanDeleteThisEmployeeExecute()
@@ -101,6 +103,9 @@ namespace DAN_XLIII.ViewModel
             return true;
         }
 
+        #endregion
+
+        #region EDIT command
         //open window for editing user's data
         private ICommand _editThisEmployee;
         public ICommand editThisEmployee
@@ -114,31 +119,68 @@ namespace DAN_XLIII.ViewModel
                 return _editThisEmployee;
             }
         }
-        #endregion
 
-        #region EDIT command
         private void EditThisEmployeeExecute()
         {
             try
             {
-                //pass data about user as viewUser parameter
-                //EditUser editUser = new EditUser(viewUser);
-                //editUser.ShowDialog();
-                //if ((editUser.DataContext as EditUserViewModel).isUpdatedUser == true)
-                //{
-                //    userList = Service.Service.GetAllUsers();
+                if (viewEmployee != null)
+                {
+                    AddEmployee editEmployee = new AddEmployee(viewEmployee);
+                    editEmployee.ShowDialog();
 
-                //}
+                    if ((editEmployee.DataContext as AddEmployeeViewModel).isUpdatedEmployee == true)
+                    {
+                        employeeList = Service.Service.GetAllEmployees();
+                    }
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
         }
+
         private bool CanEditThisEmployeeExecute()
         {
             return true;
         }
         #endregion
+
+        private ICommand _addNewEmployee;
+        public ICommand addNewEmployee
+        {
+            get
+            {
+                if (_addNewEmployee == null)
+                {
+                    _addNewEmployee = new RelayCommand(param => AddNewEmployeeExecute(), param => CanAddNewEmployeeExecute());
+                }
+                return _addNewEmployee;
+            }
+        }
+
+        private void AddNewEmployeeExecute()
+        {
+            try
+            {
+                AddEmployee addEmployee = new AddEmployee();
+                addEmployee.ShowDialog();
+                if ((addEmployee.DataContext as AddEmployeeViewModel).isUpdatedEmployee == true)
+                {
+                    employeeList = Service.Service.GetAllEmployees();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+        private bool CanAddNewEmployeeExecute()
+        {
+            return true;
+        }
+
     }
 }
