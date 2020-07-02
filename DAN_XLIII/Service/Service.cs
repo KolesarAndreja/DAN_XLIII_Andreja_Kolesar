@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DAN_XLIII.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -66,5 +67,55 @@ namespace DAN_XLIII.Service
             }
 
         }
+
+
+        #region ADD
+        /// <summary>
+        /// Add new employee or manager to db. 
+        /// </summary>
+        /// <param name="employee">Add this employee to db</param>
+        /// <param name="manager">true if this employee is also and manager</param>
+        public static void AddNewEmployeeOrManager(tblEmployee employee, bool manager)
+        {
+            try
+            {
+                using (DataRecordsEntities context = new DataRecordsEntities())
+                {
+                    //add into tblEmployee
+                    tblEmployee newEmployee = new tblEmployee();
+                    newEmployee.firstname = employee.firstname;
+                    newEmployee.lastname = employee.lastname;
+                    newEmployee.dateOfBirth = employee.dateOfBirth;
+                    newEmployee.jmbg = employee.jmbg;
+                    newEmployee.accountNumber = employee.accountNumber;
+                    newEmployee.mail = employee.mail;
+                    newEmployee.salary = employee.salary;
+                    newEmployee.position = employee.position;
+                    newEmployee.username = employee.username;
+                    newEmployee.password = employee.password;
+                    context.tblEmployees.Add(newEmployee);
+                    context.SaveChanges();
+                    employee.employeeId = newEmployee.employeeId;
+
+                    if (manager)
+                    {
+                        //add into tblManager
+                        tblManager newManager = new tblManager();
+                        newManager.managerId = employee.employeeId;
+                        newManager.sector = employee.sector;
+                        newManager.access = employee.access;
+                        context.tblManagers.Add(newManager);
+                        context.SaveChanges();
+                    }
+                   
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception: " + ex.Message.ToString());
+                return;
+            }
+        }
+        #endregion
     }
 }

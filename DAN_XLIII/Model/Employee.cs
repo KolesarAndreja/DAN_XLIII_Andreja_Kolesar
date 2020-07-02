@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DAN_XLIII.Model
 {
-    //employee model contain username, password, role, and id
+    //employee model contains username, password, role, and id
     class Employee
     {
         public string username { get; set; }

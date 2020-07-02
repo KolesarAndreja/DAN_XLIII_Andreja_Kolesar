@@ -4,20 +4,20 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DataRecordsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DataRecordsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tblEmployees">
           <Key>
             <PropertyRef Name="employeeId" />
           </Key>
           <Property Name="employeeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="firstname" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="lastname" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="jmbg" Type="char" MaxLength="13" Nullable="false" />
-          <Property Name="mail" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="firstname" Type="varchar" MaxLength="20" />
+          <Property Name="lastname" Type="varchar" MaxLength="20" />
+          <Property Name="jmbg" Type="char" MaxLength="13" />
+          <Property Name="mail" Type="varchar" MaxLength="30" />
           <Property Name="salary" Type="numeric" Precision="18" Scale="0" />
-          <Property Name="dateOfBirth" Type="date" Nullable="false" />
+          <Property Name="dateOfBirth" Type="date" />
           <Property Name="position" Type="varchar" MaxLength="25" />
-          <Property Name="accountNumber" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="accountNumber" Type="varchar" MaxLength="20" />
           <Property Name="username" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="password" Type="varchar" MaxLength="20" Nullable="false" />
         </EntityType>
@@ -59,7 +59,7 @@ warning 6002: The table/view 'DataRecords.dbo.vwReports' does not have a primary
           <Property Name="position" Type="varchar" MaxLength="25" />
           <Property Name="workingHours" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK__tblManage__manag__44FF419A">
+        <Association Name="FK__tblManage__manag__4E88ABD4">
           <End Role="tblEmployees" Type="Self.tblEmployees" Multiplicity="0..1" />
           <End Role="tblManagers" Type="Self.tblManagers" Multiplicity="*" />
           <ReferentialConstraint>
@@ -71,7 +71,7 @@ warning 6002: The table/view 'DataRecords.dbo.vwReports' does not have a primary
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblReport__emplo__47DBAE45">
+        <Association Name="FK__tblReport__emplo__5165187F">
           <End Role="tblEmployees" Type="Self.tblEmployees" Multiplicity="0..1" />
           <End Role="tblReports" Type="Self.tblReports" Multiplicity="*" />
           <ReferentialConstraint>
@@ -103,17 +103,16 @@ warning 6002: The table/view 'DataRecords.dbo.vwReports' does not have a primary
     [vwReports].[workingHours] AS [workingHours]
     FROM [dbo].[vwReports] AS [vwReports]</DefiningQuery>
           </EntitySet>
-          <AssociationSet Name="FK__tblManage__manag__44FF419A" Association="Self.FK__tblManage__manag__44FF419A">
+          <AssociationSet Name="FK__tblManage__manag__4E88ABD4" Association="Self.FK__tblManage__manag__4E88ABD4">
             <End Role="tblEmployees" EntitySet="tblEmployees" />
             <End Role="tblManagers" EntitySet="tblManagers" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblReport__emplo__47DBAE45" Association="Self.FK__tblReport__emplo__47DBAE45">
+          <AssociationSet Name="FK__tblReport__emplo__5165187F" Association="Self.FK__tblReport__emplo__5165187F">
             <End Role="tblEmployees" EntitySet="tblEmployees" />
             <End Role="tblReports" EntitySet="tblReports" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DataRecordsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -122,14 +121,14 @@ warning 6002: The table/view 'DataRecords.dbo.vwReports' does not have a primary
             <PropertyRef Name="employeeId" />
           </Key>
           <Property Name="employeeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="firstname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="lastname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="jmbg" Type="String" MaxLength="13" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="mail" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="firstname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="lastname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="jmbg" Type="String" MaxLength="13" FixedLength="true" Unicode="false" />
+          <Property Name="mail" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="salary" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="dateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="dateOfBirth" Type="DateTime" Precision="0" />
           <Property Name="position" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="accountNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="accountNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="username" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="tblManagers" Relationship="Self.FK__tblManage__manag__44FF419A" FromRole="tblEmployees" ToRole="tblManagers" />

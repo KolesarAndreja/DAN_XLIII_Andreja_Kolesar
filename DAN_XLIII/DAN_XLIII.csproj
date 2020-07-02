@@ -65,6 +65,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Command\RelayCommand.cs" />
+    <Compile Include="Converter\StringConverter.cs" />
     <Compile Include="Model\Employee.cs" />
     <Compile Include="Service\Model1.Context.cs">
       <AutoGen>True</AutoGen>
@@ -94,6 +95,7 @@
     <Compile Include="Service\vwReport.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\AdminViewModel.cs" />
     <Compile Include="ViewModel\AuthenticationViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="View\AdminMenu.xaml.cs">

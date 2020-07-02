@@ -19,14 +19,14 @@ DROP VIEW vwReports
 --employees
 CREATE TABLE tblEmployees(
 	employeeId INT PRIMARY KEY IDENTITY(1,1),
-	firstname VARCHAR(20) NOT NULL,
-	lastname VARCHAR(20) NOT NULL,
-	jmbg CHAR(13) NOT NULL,
-	mail VARCHAR(30) NOT NULL,
+	firstname VARCHAR(20),
+	lastname VARCHAR(20),
+	jmbg CHAR(13),
+	mail VARCHAR(30),
 	salary NUMERIC,
-	dateOfBirth DATE not null,
+	dateOfBirth DATE,
 	position VARCHAR(25),
-	accountNumber VARCHAR(20) NOT NULL,
+	accountNumber VARCHAR(20),
 	username VARCHAR(20) UNIQUE NOT NULL,
 	password VARCHAR(20) NOT NULL,
 	);

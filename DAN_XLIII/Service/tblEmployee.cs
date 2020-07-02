@@ -27,12 +27,17 @@ namespace DAN_XLIII.Service
         public string jmbg { get; set; }
         public string mail { get; set; }
         public Nullable<decimal> salary { get; set; }
-        public System.DateTime dateOfBirth { get; set; }
+        public Nullable<System.DateTime> dateOfBirth { get; set; }
         public string position { get; set; }
         public string accountNumber { get; set; }
         public string username { get; set; }
         public string password { get; set; }
     
+
+        //not mapping props
+        public string access { get; set; }
+        public string sector { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblManager> tblManagers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
