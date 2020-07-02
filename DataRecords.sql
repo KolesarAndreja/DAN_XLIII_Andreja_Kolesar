@@ -31,7 +31,8 @@ CREATE TABLE tblEmployees(
 	password VARCHAR(20) NOT NULL,
 	);
 CREATE TABLE tblManagers(
-	managerId INT FOREIGN KEY REFERENCES  tblEmployees(employeeId) ON DELETE SET NULL,
+	managerId INT PRIMARY KEY IDENTITY(1,1),
+	employeeId INT FOREIGN KEY REFERENCES  tblEmployees(employeeId) ON DELETE SET NULL,
 	sector VARCHAR(30) NOT NULL,
 	access VARCHAR(15) NOT NULL
 );

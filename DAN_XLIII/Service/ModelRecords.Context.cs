@@ -13,10 +13,10 @@ namespace DAN_XLIII.Service
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DataRecordsEntities : DbContext
+    public partial class DataRecordsEntities1 : DbContext
     {
-        public DataRecordsEntities()
-            : base("name=DataRecordsEntities")
+        public DataRecordsEntities1()
+            : base("name=DataRecordsEntities1")
         {
         }
     
@@ -26,8 +26,8 @@ namespace DAN_XLIII.Service
         }
     
         public virtual DbSet<tblEmployee> tblEmployees { get; set; }
-        public virtual DbSet<tblReport> tblReports { get; set; }
         public virtual DbSet<tblManager> tblManagers { get; set; }
+        public virtual DbSet<tblReport> tblReports { get; set; }
         public virtual DbSet<vwReport> vwReports { get; set; }
     }
 }

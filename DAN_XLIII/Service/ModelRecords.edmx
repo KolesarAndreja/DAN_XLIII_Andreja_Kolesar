@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="DataRecordsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="DataRecordsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tblEmployees">
           <Key>
             <PropertyRef Name="employeeId" />
@@ -21,14 +21,12 @@
           <Property Name="username" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="password" Type="varchar" MaxLength="20" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DataRecords.dbo.tblManagers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="tblManagers">
           <Key>
-            <PropertyRef Name="sector" />
-            <PropertyRef Name="access" />
+            <PropertyRef Name="managerId" />
           </Key>
-          <Property Name="managerId" Type="int" />
+          <Property Name="managerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="employeeId" Type="int" />
           <Property Name="sector" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="access" Type="varchar" MaxLength="15" Nullable="false" />
         </EntityType>
@@ -59,7 +57,7 @@ warning 6002: The table/view 'DataRecords.dbo.vwReports' does not have a primary
           <Property Name="position" Type="varchar" MaxLength="25" />
           <Property Name="workingHours" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK__tblManage__manag__4E88ABD4">
+        <Association Name="FK__tblManage__emplo__628FA481">
           <End Role="tblEmployees" Type="Self.tblEmployees" Multiplicity="0..1" />
           <End Role="tblManagers" Type="Self.tblManagers" Multiplicity="*" />
           <ReferentialConstraint>
@@ -67,11 +65,11 @@ warning 6002: The table/view 'DataRecords.dbo.vwReports' does not have a primary
               <PropertyRef Name="employeeId" />
             </Principal>
             <Dependent Role="tblManagers">
-              <PropertyRef Name="managerId" />
+              <PropertyRef Name="employeeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblReport__emplo__5165187F">
+        <Association Name="FK__tblReport__emplo__656C112C">
           <End Role="tblEmployees" Type="Self.tblEmployees" Multiplicity="0..1" />
           <End Role="tblReports" Type="Self.tblReports" Multiplicity="*" />
           <ReferentialConstraint>
@@ -85,14 +83,8 @@ warning 6002: The table/view 'DataRecords.dbo.vwReports' does not have a primary
         </Association>
         <EntityContainer Name="DataRecordsModelStoreContainer">
           <EntitySet Name="tblEmployees" EntityType="Self.tblEmployees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblManagers" EntityType="Self.tblManagers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblReports" EntityType="Self.tblReports" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tblManagers" EntityType="Self.tblManagers" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [tblManagers].[managerId] AS [managerId], 
-    [tblManagers].[sector] AS [sector], 
-    [tblManagers].[access] AS [access]
-    FROM [dbo].[tblManagers] AS [tblManagers]</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="vwReports" EntityType="Self.vwReports" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [vwReports].[reportId] AS [reportId], 
@@ -103,16 +95,17 @@ warning 6002: The table/view 'DataRecords.dbo.vwReports' does not have a primary
     [vwReports].[workingHours] AS [workingHours]
     FROM [dbo].[vwReports] AS [vwReports]</DefiningQuery>
           </EntitySet>
-          <AssociationSet Name="FK__tblManage__manag__4E88ABD4" Association="Self.FK__tblManage__manag__4E88ABD4">
+          <AssociationSet Name="FK__tblManage__emplo__628FA481" Association="Self.FK__tblManage__emplo__628FA481">
             <End Role="tblEmployees" EntitySet="tblEmployees" />
             <End Role="tblManagers" EntitySet="tblManagers" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblReport__emplo__5165187F" Association="Self.FK__tblReport__emplo__5165187F">
+          <AssociationSet Name="FK__tblReport__emplo__656C112C" Association="Self.FK__tblReport__emplo__656C112C">
             <End Role="tblEmployees" EntitySet="tblEmployees" />
             <End Role="tblReports" EntitySet="tblReports" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DataRecordsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -131,8 +124,18 @@ warning 6002: The table/view 'DataRecords.dbo.vwReports' does not have a primary
           <Property Name="accountNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="username" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="tblManagers" Relationship="Self.FK__tblManage__manag__44FF419A" FromRole="tblEmployees" ToRole="tblManagers" />
-          <NavigationProperty Name="tblReports" Relationship="Self.FK__tblReport__emplo__47DBAE45" FromRole="tblEmployees" ToRole="tblReports" />
+          <NavigationProperty Name="tblManagers" Relationship="Self.FK__tblManage__emplo__628FA481" FromRole="tblEmployees" ToRole="tblManagers" />
+          <NavigationProperty Name="tblReports" Relationship="Self.FK__tblReport__emplo__656C112C" FromRole="tblEmployees" ToRole="tblReports" />
+        </EntityType>
+        <EntityType Name="tblManager">
+          <Key>
+            <PropertyRef Name="managerId" />
+          </Key>
+          <Property Name="managerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="employeeId" Type="Int32" />
+          <Property Name="sector" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="access" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tblEmployee" Relationship="Self.FK__tblManage__emplo__628FA481" FromRole="tblManagers" ToRole="tblEmployees" />
         </EntityType>
         <EntityType Name="tblReport">
           <Key>
@@ -143,17 +146,7 @@ warning 6002: The table/view 'DataRecords.dbo.vwReports' does not have a primary
           <Property Name="reportDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="project" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="workingHours" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="tblEmployee" Relationship="Self.FK__tblReport__emplo__47DBAE45" FromRole="tblReports" ToRole="tblEmployees" />
-        </EntityType>
-        <EntityType Name="tblManager">
-          <Key>
-            <PropertyRef Name="sector" />
-            <PropertyRef Name="access" />
-          </Key>
-          <Property Name="managerId" Type="Int32" />
-          <Property Name="sector" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="access" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="tblEmployee" Relationship="Self.FK__tblManage__manag__44FF419A" FromRole="tblManagers" ToRole="tblEmployees" />
+          <NavigationProperty Name="tblEmployee" Relationship="Self.FK__tblReport__emplo__656C112C" FromRole="tblReports" ToRole="tblEmployees" />
         </EntityType>
         <EntityType Name="vwReport">
           <Key>
@@ -170,7 +163,7 @@ warning 6002: The table/view 'DataRecords.dbo.vwReports' does not have a primary
           <Property Name="position" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="workingHours" Type="Int32" Nullable="false" />
         </EntityType>
-        <Association Name="FK__tblManage__manag__44FF419A">
+        <Association Name="FK__tblManage__emplo__628FA481">
           <End Role="tblEmployees" Type="Self.tblEmployee" Multiplicity="0..1" />
           <End Role="tblManagers" Type="Self.tblManager" Multiplicity="*" />
           <ReferentialConstraint>
@@ -178,11 +171,11 @@ warning 6002: The table/view 'DataRecords.dbo.vwReports' does not have a primary
               <PropertyRef Name="employeeId" />
             </Principal>
             <Dependent Role="tblManagers">
-              <PropertyRef Name="managerId" />
+              <PropertyRef Name="employeeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblReport__emplo__47DBAE45">
+        <Association Name="FK__tblReport__emplo__656C112C">
           <End Role="tblEmployees" Type="Self.tblEmployee" Multiplicity="0..1" />
           <End Role="tblReports" Type="Self.tblReport" Multiplicity="*" />
           <ReferentialConstraint>
@@ -194,16 +187,16 @@ warning 6002: The table/view 'DataRecords.dbo.vwReports' does not have a primary
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="DataRecordsEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="DataRecordsEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="tblEmployees" EntityType="Self.tblEmployee" />
-          <EntitySet Name="tblReports" EntityType="Self.tblReport" />
           <EntitySet Name="tblManagers" EntityType="Self.tblManager" />
+          <EntitySet Name="tblReports" EntityType="Self.tblReport" />
           <EntitySet Name="vwReports" EntityType="Self.vwReport" />
-          <AssociationSet Name="FK__tblManage__manag__44FF419A" Association="Self.FK__tblManage__manag__44FF419A">
+          <AssociationSet Name="FK__tblManage__emplo__628FA481" Association="Self.FK__tblManage__emplo__628FA481">
             <End Role="tblEmployees" EntitySet="tblEmployees" />
             <End Role="tblManagers" EntitySet="tblManagers" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblReport__emplo__47DBAE45" Association="Self.FK__tblReport__emplo__47DBAE45">
+          <AssociationSet Name="FK__tblReport__emplo__656C112C" Association="Self.FK__tblReport__emplo__656C112C">
             <End Role="tblEmployees" EntitySet="tblEmployees" />
             <End Role="tblReports" EntitySet="tblReports" />
           </AssociationSet>
@@ -213,7 +206,7 @@ warning 6002: The table/view 'DataRecords.dbo.vwReports' does not have a primary
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="DataRecordsModelStoreContainer" CdmEntityContainer="DataRecordsEntities">
+        <EntityContainerMapping StorageEntityContainer="DataRecordsModelStoreContainer" CdmEntityContainer="DataRecordsEntities1">
           <EntitySetMapping Name="tblEmployees">
             <EntityTypeMapping TypeName="DataRecordsModel.tblEmployee">
               <MappingFragment StoreEntitySet="tblEmployees">
@@ -231,6 +224,16 @@ warning 6002: The table/view 'DataRecords.dbo.vwReports' does not have a primary
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="tblManagers">
+            <EntityTypeMapping TypeName="DataRecordsModel.tblManager">
+              <MappingFragment StoreEntitySet="tblManagers">
+                <ScalarProperty Name="managerId" ColumnName="managerId" />
+                <ScalarProperty Name="employeeId" ColumnName="employeeId" />
+                <ScalarProperty Name="sector" ColumnName="sector" />
+                <ScalarProperty Name="access" ColumnName="access" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="tblReports">
             <EntityTypeMapping TypeName="DataRecordsModel.tblReport">
               <MappingFragment StoreEntitySet="tblReports">
@@ -239,15 +242,6 @@ warning 6002: The table/view 'DataRecords.dbo.vwReports' does not have a primary
                 <ScalarProperty Name="reportDate" ColumnName="reportDate" />
                 <ScalarProperty Name="project" ColumnName="project" />
                 <ScalarProperty Name="workingHours" ColumnName="workingHours" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tblManagers">
-            <EntityTypeMapping TypeName="DataRecordsModel.tblManager">
-              <MappingFragment StoreEntitySet="tblManagers">
-                <ScalarProperty Name="managerId" ColumnName="managerId" />
-                <ScalarProperty Name="sector" ColumnName="sector" />
-                <ScalarProperty Name="access" ColumnName="access" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

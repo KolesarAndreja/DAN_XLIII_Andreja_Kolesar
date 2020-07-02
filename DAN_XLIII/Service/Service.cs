@@ -13,7 +13,7 @@ namespace DAN_XLIII.Service
         {
             try
             {
-                using (DataRecordsEntities context = new DataRecordsEntities())
+                using (DataRecordsEntities1 context = new DataRecordsEntities1())
                 {
                     tblEmployee result = (from x in context.tblEmployees where x.username == username && x.password == password select x).FirstOrDefault();
                     return result;
@@ -30,9 +30,9 @@ namespace DAN_XLIII.Service
         {
             try
             {
-                using (DataRecordsEntities context = new DataRecordsEntities())
+                using (DataRecordsEntities1 context = new DataRecordsEntities1())
                 {
-                    tblManager result = (from x in context.tblManagers where x.managerId == e.employeeId select x).FirstOrDefault();
+                    tblManager result = (from x in context.tblManagers where x.employeeId == e.employeeId select x).FirstOrDefault();
                     if (result != null)
                     {
                         return true;
@@ -54,9 +54,9 @@ namespace DAN_XLIII.Service
         {
             try
             {
-                using (DataRecordsEntities context = new DataRecordsEntities())
+                using (DataRecordsEntities1 context = new DataRecordsEntities1())
                 {
-                    tblManager result = (from x in context.tblManagers where x.managerId == id select x).FirstOrDefault();
+                    tblManager result = (from x in context.tblManagers where x.employeeId == id select x).FirstOrDefault();
                     return result;
                 }
             }
@@ -68,6 +68,26 @@ namespace DAN_XLIII.Service
 
         }
 
+        #region READ ALL
+        public static List<tblEmployee> GetAllEmployees()
+        {
+            try
+            {
+                using (DataRecordsEntities1 context = new DataRecordsEntities1())
+                {
+                    List<tblEmployee> list = new List<tblEmployee>();
+                    list = (from x in context.tblEmployees select x).ToList();
+                    return list;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception" + ex.Message.ToString());
+                return null;
+            }
+        }
+
+        #endregion
 
         #region ADD
         /// <summary>
@@ -79,7 +99,7 @@ namespace DAN_XLIII.Service
         {
             try
             {
-                using (DataRecordsEntities context = new DataRecordsEntities())
+                using (DataRecordsEntities1 context = new DataRecordsEntities1())
                 {
                     //add into tblEmployee
                     tblEmployee newEmployee = new tblEmployee();
@@ -101,13 +121,12 @@ namespace DAN_XLIII.Service
                     {
                         //add into tblManager
                         tblManager newManager = new tblManager();
-                        newManager.managerId = employee.employeeId;
+                        newManager.employeeId = employee.employeeId;
                         newManager.sector = employee.sector;
                         newManager.access = employee.access;
                         context.tblManagers.Add(newManager);
                         context.SaveChanges();
                     }
-                   
                 }
             }
             catch (Exception ex)

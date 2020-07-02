@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DAN_XLIII.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,7 @@ namespace DAN_XLIII.View
         public ManagerModify()
         {
             InitializeComponent();
+            this.DataContext = new ManagerModifyViewModel(this);
         }
 
     }

@@ -32,12 +32,11 @@ namespace DAN_XLIII.Service
         public string accountNumber { get; set; }
         public string username { get; set; }
         public string password { get; set; }
-    
 
-        //not mapping props
+        //not mapping fields
         public string access { get; set; }
         public string sector { get; set; }
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblManager> tblManagers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -14,7 +14,8 @@ namespace DAN_XLIII.Service
     
     public partial class tblManager
     {
-        public Nullable<int> managerId { get; set; }
+        public int managerId { get; set; }
+        public Nullable<int> employeeId { get; set; }
         public string sector { get; set; }
         public string access { get; set; }
     
