@@ -9,6 +9,12 @@ DROP TABLE tblEmployees;
 IF OBJECT_ID('tblManagers') IS NOT NULL 
 DROP TABLE tblManagers;
 
+IF OBJECT_ID('tblReports') IS NOT NULL 
+DROP TABLE tblReports;
+
+IF OBJECT_ID('vwReports') IS NOT NULL 
+DROP VIEW vwReports
+
 --creating tables
 --employees
 CREATE TABLE tblEmployees(
@@ -29,3 +35,20 @@ CREATE TABLE tblManagers(
 	sector VARCHAR(30) NOT NULL,
 	access VARCHAR(15) NOT NULL
 );
+
+CREATE TABLE tblReports(
+    reportId INT PRIMARY KEY IDENTITY(1,1),
+	employeeId INT FOREIGN KEY REFERENCES  tblEmployees(employeeId),
+	reportDate DATE NOT NULL,
+	project VARCHAR(30) NOT NULL,
+	workingHours INT NOT NULL
+);
+
+GO
+CREATE VIEW vwReports
+as
+select r.reportId,r.reportDate, CONCAT(e.firstname, ' ', e.lastname) AS fullname,
+r.project,e.position,r.workingHours
+from tblReports r
+inner join tblEmployees e
+on e.employeeId = r.employeeId 
