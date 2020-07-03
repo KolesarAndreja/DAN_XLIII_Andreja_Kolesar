@@ -83,7 +83,7 @@ namespace DAN_XLIII.ViewModel
 
         private bool CanSaveExecute()
         {
-            if (String.IsNullOrEmpty(newEmployee.firstname) || String.IsNullOrEmpty(newEmployee.lastname) || String.IsNullOrEmpty(newEmployee.jmbg) || String.IsNullOrEmpty(newEmployee.access) || String.IsNullOrEmpty(newEmployee.username) || String.IsNullOrEmpty(newEmployee.password))
+            if (String.IsNullOrEmpty(newEmployee.firstname) || String.IsNullOrEmpty(newEmployee.lastname) || String.IsNullOrEmpty(newEmployee.jmbg) || String.IsNullOrEmpty(newEmployee.username) || String.IsNullOrEmpty(newEmployee.password))
             {
                 return false;
             }
